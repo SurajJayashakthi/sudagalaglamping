@@ -51,10 +51,10 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
           >
-            <h2 className="text-sm md:text-base tracking-[0.3em] uppercase mb-4 font-bold text-stone-300 drop-shadow-md">Glamping, Because Therapy is Expensive</h2>
-            <h3 className="text-xs md:text-sm tracking-[0.5em] uppercase mb-8 font-bold text-emerald-400 drop-shadow-md">Sudagala Village • KURUWAITA</h3>
-            <h1 className="text-7xl md:text-[10rem] font-bold font-serif mb-12 leading-[0.8] tracking-tighter drop-shadow-2xl">
-              Sanctuary <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-200 to-white italic">of Wilds</span>
+            <h2 className="text-sm md:text-base tracking-[0.3em] uppercase mb-4 font-bold text-stone-200 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">Glamping, Because Therapy is Expensive</h2>
+            <h3 className="text-xs md:text-sm tracking-[0.5em] uppercase mb-8 font-bold text-emerald-400 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">Sudagala Village • KURUWAITA</h3>
+            <h1 className="text-7xl md:text-[10rem] font-bold font-serif mb-12 leading-[0.8] tracking-tighter drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)]">
+              Sanctuary <br /><span className="text-emerald-300 italic">of Wilds</span>
             </h1>
           </motion.div>
           <motion.p
@@ -241,7 +241,7 @@ export default function Home() {
       </section>
 
       {/* Jungle Hiking Section */}
-      <section className="py-40 bg-gradient-to-br from-emerald-50 via-white to-stone-50 relative overflow-hidden">
+      <section className="py-40 bg-emerald-950 relative overflow-hidden text-white">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* Image Side */}
@@ -274,29 +274,29 @@ export default function Home() {
             {/* Content Side */}
             <div className="order-1 lg:order-2">
               <h2 className="text-sm font-black text-emerald-900 uppercase tracking-[0.4em] mb-6">Adventure Awaits</h2>
-              <h3 className="text-5xl md:text-6xl font-bold font-serif text-emerald-950 mb-10 leading-tight">
+              <h3 className="text-5xl md:text-6xl font-bold font-serif text-white mb-10 leading-tight">
                 Guided Jungle <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-700 to-emerald-900 italic">Waterfall Hike</span>
+                <span className="text-emerald-400 italic">Waterfall Hike</span>
               </h3>
-              <p className="text-stone-700 text-lg mb-10 leading-relaxed font-bold">
+              <p className="text-emerald-50 text-xl mb-10 leading-relaxed font-medium">
                 Embark on a 2-hour guided trek through lush wilderness to a hidden scenic waterfall. A true immersion into the Ratnapura rainforest, where nature reveals its most spectacular secrets.
               </p>
 
               {/* Features Grid */}
               <div className="grid grid-cols-2 gap-6 mb-10">
-                <div className="bg-emerald-50 rounded-2xl p-5 border border-emerald-100">
+                <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-5 border border-white/10">
                   <div className="w-12 h-12 bg-emerald-900 rounded-xl flex items-center justify-center mb-4">
                     <span className="text-2xl">🥾</span>
                   </div>
-                  <h4 className="font-bold text-emerald-950 text-sm mb-2">Expert Guides</h4>
-                  <p className="text-xs text-stone-500 font-medium">Local naturalists lead the way</p>
+                  <h4 className="font-bold text-white text-sm mb-2">Expert Guides</h4>
+                  <p className="text-xs text-emerald-200/70 font-medium">Local naturalists lead the way</p>
                 </div>
-                <div className="bg-emerald-50 rounded-2xl p-5 border border-emerald-100">
+                <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-5 border border-white/10">
                   <div className="w-12 h-12 bg-emerald-900 rounded-xl flex items-center justify-center mb-4">
                     <span className="text-2xl">💧</span>
                   </div>
-                  <h4 className="font-bold text-emerald-950 text-sm mb-2">Hidden Falls</h4>
-                  <p className="text-xs text-stone-500 font-medium">Pristine natural pools</p>
+                  <h4 className="font-bold text-white text-sm mb-2">Hidden Falls</h4>
+                  <p className="text-xs text-emerald-200/70 font-medium">Pristine natural pools</p>
                 </div>
               </div>
 
