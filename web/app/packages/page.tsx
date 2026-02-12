@@ -40,7 +40,6 @@ export default function PackagesPage() {
 
     return (
         <div className="flex flex-col min-h-screen bg-white">
-            <Header />
             <main className="flex-grow pt-48 pb-40">
                 <div className="container mx-auto px-4">
                     <motion.div

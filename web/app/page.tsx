@@ -42,7 +42,7 @@ export default function Home() {
             priority
             suppressHydrationWarning
           />
-          <div className="absolute inset-0 bg-stone-900/20"></div>
+          <div className="absolute inset-0 bg-stone-900/40"></div>
         </motion.div>
 
         <div className="relative z-10 text-center text-white px-4 max-w-6xl mx-auto">
@@ -51,8 +51,8 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
           >
-            <h2 className="text-sm md:text-base tracking-[0.3em] uppercase mb-4 font-bold text-white/90 drop-shadow-md">Glamping, Because Therapy is Expensive</h2>
-            <h3 className="text-xs md:text-sm tracking-[0.5em] uppercase mb-8 font-bold text-emerald-300 drop-shadow-md">Sudagala Village • Kuruwita</h3>
+            <h2 className="text-sm md:text-base tracking-[0.3em] uppercase mb-4 font-bold text-stone-300 drop-shadow-md">Glamping, Because Therapy is Expensive</h2>
+            <h3 className="text-xs md:text-sm tracking-[0.5em] uppercase mb-8 font-bold text-emerald-400 drop-shadow-md">Sudagala Village • KURUWAITA</h3>
             <h1 className="text-7xl md:text-[10rem] font-bold font-serif mb-12 leading-[0.8] tracking-tighter drop-shadow-2xl">
               Sanctuary <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-200 to-white italic">of Wilds</span>
             </h1>
@@ -273,12 +273,12 @@ export default function Home() {
 
             {/* Content Side */}
             <div className="order-1 lg:order-2">
-              <h2 className="text-sm font-bold text-emerald-800 uppercase tracking-[0.4em] mb-6">Adventure Awaits</h2>
+              <h2 className="text-sm font-black text-emerald-900 uppercase tracking-[0.4em] mb-6">Adventure Awaits</h2>
               <h3 className="text-5xl md:text-6xl font-bold font-serif text-emerald-950 mb-10 leading-tight">
                 Guided Jungle <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-700 to-emerald-900 italic">Waterfall Hike</span>
               </h3>
-              <p className="text-stone-600 text-lg mb-10 leading-relaxed font-medium">
+              <p className="text-stone-700 text-lg mb-10 leading-relaxed font-bold">
                 Embark on a 2-hour guided trek through lush wilderness to a hidden scenic waterfall. A true immersion into the Ratnapura rainforest, where nature reveals its most spectacular secrets.
               </p>
 
