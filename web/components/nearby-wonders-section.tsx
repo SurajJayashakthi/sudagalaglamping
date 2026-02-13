@@ -41,7 +41,7 @@ export function NearbyWondersSection() {
     const [activePlace, setActivePlace] = useState<number>(0);
 
     return (
-        <section className="py-20 lg:py-40 bg-white overflow-hidden hidden md:block">
+        <section className="py-20 lg:py-40 bg-white overflow-hidden">
             <div className="container mx-auto px-4">
                 <div className="flex flex-col lg:flex-row gap-12 lg:gap-24 items-center">
                     {/* Left Side - Place Cards */}
@@ -61,6 +61,16 @@ export function NearbyWondersSection() {
                                     onMouseEnter={() => setActivePlace(i)}
                                     onClick={() => setActivePlace(i)}
                                 >
+                                    {/* Mobile Image (shown only when active on small screens) */}
+                                    <div className={`lg:hidden mb-4 overflow-hidden rounded-xl h-40 relative transition-all duration-300 ${activePlace === i ? 'opacity-100 scale-100' : 'opacity-0 scale-95 h-0 hidden'}`}>
+                                        <SupabaseImage
+                                            src={place.image}
+                                            alt={place.name}
+                                            fill
+                                            className="object-cover"
+                                        />
+                                    </div>
+
                                     <span className={`block font-serif font-bold text-base lg:text-lg mb-1 transition-colors ${activePlace === i ? 'text-emerald-700' : 'text-emerald-900'
                                         }`}>
                                         {place.name}

@@ -28,7 +28,7 @@ export function AmenitiesSlider() {
         setMounted(true);
         // Set faster duration for mobile
         if (window.innerWidth < 768) {
-            setDuration(25);
+            setDuration(15);
         }
     }, []);
 

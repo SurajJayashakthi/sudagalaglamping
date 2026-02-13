@@ -53,8 +53,8 @@ export default function Home() {
           >
             <h2 className="text-sm md:text-base tracking-[0.3em] uppercase mb-4 font-bold text-stone-200 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">Glamping, Because Therapy is Expensive</h2>
             <h3 className="text-xs md:text-sm tracking-[0.5em] uppercase mb-8 font-bold text-emerald-400 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">Sudagala Village • KURUWAITA</h3>
-            <h1 className="text-7xl md:text-[10rem] font-bold font-serif mb-12 leading-[0.8] tracking-tighter drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)]">
-              Sanctuary <br /><span className="text-emerald-300 italic">of Wilds</span>
+            <h1 className="text-5xl md:text-[10rem] font-bold font-serif mb-12 leading-[1.1] md:leading-[0.8] tracking-tighter drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)]">
+              Sanctuary <br className="hidden md:block" /><span className="text-emerald-300 italic">of Wilds</span>
             </h1>
           </motion.div>
           <motion.p
@@ -94,7 +94,7 @@ export default function Home() {
             </div>
             <div className="order-1 lg:order-2">
               <h2 className="text-sm font-bold text-emerald-800 uppercase tracking-[0.4em] mb-6">About the retreat</h2>
-              <h3 className="text-5xl md:text-6xl font-bold font-serif text-emerald-950 mb-10 leading-tight">With Us You Can Be Closer to Nature</h3>
+              <h3 className="text-4xl md:text-6xl font-bold font-serif text-emerald-950 mb-10 leading-tight">With Us You Can Be Closer to Nature</h3>
               <p className="text-stone-600 mb-8 text-lg leading-relaxed font-medium">
                 Sudagala Jungle Glamping is a peaceful retreat near the Sri Pada Forest Reserve, offering an immersive nature experience where modern comfort meets the untamed beauty of the jungle.
               </p>
@@ -178,7 +178,7 @@ export default function Home() {
       <section className="py-24 bg-stone-50 overflow-hidden">
         <div className="container mx-auto px-4 mb-16 text-center">
           <h2 className="text-[11px] font-bold text-emerald-800 uppercase tracking-[0.5em] mb-4">On-Site Amenities</h2>
-          <h3 className="text-5xl md:text-6xl font-bold font-serif text-emerald-950">Curated For Comfort</h3>
+          <h3 className="text-4xl md:text-6xl font-bold font-serif text-emerald-950">Curated For Comfort</h3>
         </div>
         <AmenitiesSlider />
       </section>
@@ -189,7 +189,7 @@ export default function Home() {
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-24 gap-8">
             <div className="max-w-2xl">
               <h2 className="text-sm font-bold text-emerald-800 uppercase tracking-[0.3em] mb-6">Our Accommodations</h2>
-              <h3 className="text-6xl md:text-7xl font-bold font-serif text-emerald-950 leading-tight">Wild <br />Sanctuaries</h3>
+              <h3 className="text-5xl md:text-7xl font-bold font-serif text-emerald-950 leading-tight">Wild <br />Sanctuaries</h3>
             </div>
             <div className="max-w-xs">
               <p className="text-stone-500 font-medium leading-relaxed mb-6">
@@ -243,7 +243,7 @@ export default function Home() {
             {/* Content Side */}
             <div className="order-1 lg:order-2">
               <h2 className="text-sm font-black text-emerald-900 uppercase tracking-[0.4em] mb-6">Adventure Awaits</h2>
-              <h3 className="text-5xl md:text-6xl font-bold font-serif text-white mb-10 leading-tight">
+              <h3 className="text-4xl md:text-6xl font-bold font-serif text-white mb-10 leading-tight">
                 Guided Jungle <br />
                 <span className="text-emerald-400 italic">Waterfall Hike</span>
               </h3>
@@ -346,7 +346,7 @@ export default function Home() {
       {/* CTA Section */}
       <section className="py-24 bg-white text-center">
         <div className="container mx-auto px-4">
-          <h2 className="text-5xl md:text-[6rem] font-bold font-serif mb-12 text-emerald-950 leading-tight tracking-tighter">Ready for your <br /><span className="italic font-normal">wilderness retreat?</span></h2>
+          <h2 className="text-4xl md:text-[6rem] font-bold font-serif mb-12 text-emerald-950 leading-tight tracking-tighter">Ready for your <br className="hidden md:block" /><span className="italic font-normal">wilderness retreat?</span></h2>
           <p className="text-stone-500 text-xl mb-16 font-medium max-w-2xl mx-auto leading-relaxed">
             Reserve your stay today and experience the serenity of Sudagala Jungle Glamping.
           </p>
