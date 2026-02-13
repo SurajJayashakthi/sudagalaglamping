@@ -83,7 +83,7 @@ export function PackageDetailClient({ slug }: PackageDetailClientProps) {
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ duration: 0.6, ease: "easeInOut" }}
-                                className="relative aspect-[4/3] rounded-[2.5rem] md:rounded-[4rem] overflow-hidden shadow-2xl border border-stone-200 bg-stone-100"
+                                className="relative w-full aspect-[4/3] rounded-[2.5rem] md:rounded-[4rem] overflow-hidden shadow-2xl border border-stone-200 bg-stone-100"
                             >
                                 <SupabaseImage
                                     src={activeImage || stay.image_url}
@@ -96,7 +96,7 @@ export function PackageDetailClient({ slug }: PackageDetailClientProps) {
 
                             {/* Thumbnail Slider */}
                             {images && images.length > 0 && (
-                                <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide snap-x">
+                                <div className="flex gap-4 overflow-x-auto pb-6 scrollbar-hide snap-x w-full">
                                     {/* Include main image in thumbnails too */}
                                     {[stay.image_url, ...images].map((img, idx) => (
                                         <div

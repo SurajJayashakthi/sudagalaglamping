@@ -22,8 +22,14 @@ export function AmenitiesSlider() {
     const [isPaused, setIsPaused] = useState(false);
     const [mounted, setMounted] = useState(false);
 
+    const [duration, setDuration] = useState(45);
+
     useEffect(() => {
         setMounted(true);
+        // Set faster duration for mobile
+        if (window.innerWidth < 768) {
+            setDuration(25);
+        }
     }, []);
 
     if (!mounted) {
@@ -47,7 +53,7 @@ export function AmenitiesSlider() {
                     x: ['0%', '-50%'],
                 }}
                 transition={{
-                    duration: 45, // Much slower for a premium feel
+                    duration: duration,
                     ease: 'linear',
                     repeat: Infinity,
                 }}
