@@ -21,6 +21,7 @@ interface PackageDetailClientProps {
 export function PackageDetailClient({ slug }: PackageDetailClientProps) {
     const [stay, setStay] = useState<Stay | null>(null);
     const [loading, setLoading] = useState(true);
+    const [activeImage, setActiveImage] = useState<string | null>(null);
 
     useEffect(() => {
         async function fetchStay() {
@@ -74,17 +75,18 @@ export function PackageDetailClient({ slug }: PackageDetailClientProps) {
 
                     {/* Main Content Grid */}
                     <div className="grid lg:grid-cols-2 gap-20 items-start mb-24">
-                        {/* Left Column */}
-                        <div className="space-y-12">
+                        {/* Left Column: Gallery Upgrade */}
+                        <div className="space-y-6">
                             {/* Main Image */}
                             <motion.div
-                                initial={{ opacity: 0, scale: 0.95 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ duration: 1 }}
-                                className="relative aspect-[4/3] rounded-[4rem] overflow-hidden shadow-2xl border border-stone-200"
+                                key={activeImage || stay.image_url}
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ duration: 0.6, ease: "easeInOut" }}
+                                className="relative aspect-[4/3] rounded-[2.5rem] md:rounded-[4rem] overflow-hidden shadow-2xl border border-stone-200 bg-stone-100"
                             >
                                 <SupabaseImage
-                                    src={stay.image_url}
+                                    src={activeImage || stay.image_url}
                                     alt={stay.title}
                                     fill
                                     className="object-cover"
@@ -92,19 +94,29 @@ export function PackageDetailClient({ slug }: PackageDetailClientProps) {
                                 />
                             </motion.div>
 
-                            {/* Gallery */}
-                            <div>
-                                {images && images.length > 0 ? (
-                                    <Gallery
-                                        images={images}
-                                        title={`Views of ${stay.title}`}
-                                    />
-                                ) : (
-                                    <div className="aspect-video bg-stone-100 rounded-3xl flex items-center justify-center text-stone-400 italic">
-                                        Gallery coming soon
-                                    </div>
-                                )}
-                            </div>
+                            {/* Thumbnail Slider */}
+                            {images && images.length > 0 && (
+                                <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide snap-x">
+                                    {/* Include main image in thumbnails too */}
+                                    {[stay.image_url, ...images].map((img, idx) => (
+                                        <div
+                                            key={idx}
+                                            onClick={() => setActiveImage(img)}
+                                            className={`relative flex-shrink-0 w-24 h-24 rounded-2xl overflow-hidden cursor-pointer border-2 transition-all snap-start ${activeImage === img || (!activeImage && img === stay.image_url)
+                                                ? 'border-emerald-600 scale-95 shadow-lg'
+                                                : 'border-transparent hover:border-emerald-200'
+                                                }`}
+                                        >
+                                            <SupabaseImage
+                                                src={img}
+                                                alt={`Thumbnail ${idx}`}
+                                                fill
+                                                className="object-cover"
+                                            />
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
                         </div>
 
                         {/* Right Column: Details & Features */}

@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button';
 export function Header() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [activeSection, setActiveSection] = useState('');
     const pathname = usePathname();
 
     useEffect(() => {
@@ -19,13 +20,35 @@ export function Header() {
         };
 
         window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+
+        const handleIntersect = (entries: IntersectionObserverEntry[]) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    setActiveSection(entry.target.id);
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(handleIntersect, {
+            rootMargin: '-50% 0px -50% 0px', // Watch the middle line of the viewport
+            threshold: 0,
+        });
+        const sections = ['home', 'about', 'packages'];
+        sections.forEach((id) => {
+            const el = document.getElementById(id);
+            if (el) observer.observe(el);
+        });
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            observer.disconnect();
+        };
     }, []);
 
     const navLinks = [
-        { name: 'Home', href: '/' },
-        { name: 'Packages', href: '/packages' },
-        { name: 'About', href: '/about' },
+        { name: 'Home', href: '/', id: 'home' },
+        { name: 'Packages', href: '/packages', id: 'packages' },
+        { name: 'About', href: '/#about', id: 'about' },
     ];
 
     // For now, I will assume routes exist or will be created. 
@@ -36,7 +59,11 @@ export function Header() {
 
     return (
         <header
-            className="fixed top-0 left-0 right-0 z-50 h-20 bg-white/5 backdrop-blur-xl border-b border-white/10 shadow-lg transition-all duration-300"
+            className={`fixed top-0 left-0 right-0 z-[100] h-20 transition-all duration-300 ${isScrolled
+                ? 'bg-white/95 backdrop-blur-xl border-b border-stone-200 shadow-md'
+                : 'bg-stone-950/20 backdrop-blur-sm border-b border-white/10'
+                }`}
+            suppressHydrationWarning
         >
             <div className="container mx-auto px-4 h-full flex items-center">
                 {/* Logo */}
@@ -46,7 +73,7 @@ export function Header() {
                         alt="Sudagala Jungle Glamping"
                         width={144}
                         height={48}
-                        className="h-full w-auto object-contain object-left"
+                        className={`h-full w-auto object-contain object-left transition-all duration-300 ${isScrolled ? 'brightness-0' : ''}`}
                         priority
                         suppressHydrationWarning
                     />
@@ -55,12 +82,21 @@ export function Header() {
                 {/* Desktop Nav */}
                 <nav className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center gap-8">
                     {navLinks.map((link) => {
-                        const isActive = pathname === link.href;
+                        let isActive = false;
+                        if (pathname === '/') {
+                            isActive = activeSection === link.id;
+                        } else {
+                            // If on another page, only highlight matching route
+                            isActive = pathname === link.href || pathname.startsWith(link.href + '/');
+                        }
+
                         return (
                             <Link
                                 key={link.name}
                                 href={link.href}
-                                className={`text-sm font-bold tracking-wide transition-colors ${isActive ? 'text-emerald-400' : 'text-white hover:text-emerald-400'
+                                className={`text-sm font-bold tracking-wide transition-colors ${isScrolled
+                                    ? isActive ? 'text-emerald-700' : 'text-stone-600 hover:text-emerald-700'
+                                    : isActive ? 'text-emerald-400' : 'text-white hover:text-emerald-400'
                                     }`}
                             >
                                 {link.name}
@@ -82,7 +118,7 @@ export function Header() {
 
                     {/* Mobile Menu Toggle */}
                     <button
-                        className="md:hidden text-white p-2"
+                        className={`md:hidden p-2 transition-all duration-300 z-[101] relative rounded-full ${isScrolled || isMobileMenuOpen ? 'text-emerald-950 bg-stone-100/80 shadow-sm' : 'text-white bg-black/20 backdrop-blur-sm'}`}
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                         suppressHydrationWarning
                     >
@@ -98,7 +134,7 @@ export function Header() {
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
-                        className="absolute top-full left-0 right-0 bg-stone-950 border-b border-white/10 p-4 md:hidden flex flex-col gap-4 shadow-2xl"
+                        className="absolute top-0 left-0 right-0 h-screen bg-stone-950 border-b border-white/10 p-6 md:hidden flex flex-col justify-center items-center gap-8 shadow-2xl z-[100]"
                     >
                         {navLinks.map((link) => (
                             <Link

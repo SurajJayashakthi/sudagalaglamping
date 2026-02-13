@@ -13,7 +13,7 @@ export function Footer() {
     return (
         <footer className="bg-stone-50 text-stone-600 py-24 border-t border-stone-200">
             <div className="container mx-auto px-4">
-                <div className="grid md:grid-cols-4 gap-12 mb-16">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-12 mb-16">
                     <div className="col-span-1 md:col-span-1">
                         <h3 className="text-emerald-900 font-bold mb-8 font-serif tracking-tight text-3xl">SUDAGALA</h3>
                         <p className="text-sm leading-relaxed text-stone-500 max-w-xs mb-6">
@@ -40,7 +40,7 @@ export function Footer() {
                         <h4 className="text-emerald-900 font-bold mb-8 text-xs uppercase tracking-[0.2em]">Contact</h4>
                         <ul className="space-y-4 text-sm font-medium">
                             <li>Sudagala Village, Kuruwita, Ratnapura</li>
-                            <li><a href="tel:0770306326" className="hover:text-emerald-700 transition-colors">077 030 6326</a></li>
+                            <li><a href="https://wa.me/94770306326" className="hover:text-emerald-700 transition-colors">077 030 6326</a></li>
                             <li><a href="mailto:sudgalainfo@gmail.com" className="hover:text-emerald-700 transition-colors">sudgalainfo@gmail.com</a></li>
                         </ul>
                     </div>

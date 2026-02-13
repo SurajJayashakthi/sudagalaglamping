@@ -8,8 +8,8 @@ import { AccommodationCard } from '@/components/ui/accommodation-card';
 import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabaseClient';
 import { Stay } from '@/types';
-import { Wifi, Waves, Footprints, Flame } from 'lucide-react';
 import { NearbyWondersSection } from '@/components/nearby-wonders-section';
+import { AmenitiesSlider } from '@/components/ui/amenities-slider';
 
 export default function Home() {
   const [stays, setStays] = useState<Stay[]>([]);
@@ -32,7 +32,7 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative h-[95vh] flex items-center justify-center overflow-hidden">
+      <section id="home" className="relative h-[95vh] flex items-center justify-center overflow-hidden">
         <motion.div style={{ y: y1 }} className="absolute inset-0 z-0 select-none" suppressHydrationWarning>
           <SupabaseImage
             src="/images/hero/new_hero.jpg"
@@ -81,7 +81,7 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section className="py-40 bg-white">
+      <section id="about" className="py-24 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-24 items-center">
             <div className="relative h-[600px] rounded-[3rem] overflow-hidden shadow-2xl order-2 lg:order-1">
@@ -174,48 +174,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Facilities Grid */}
-      <section className="py-40 bg-stone-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-32">
-            <h2 className="text-[11px] font-bold text-emerald-800 uppercase tracking-[0.5em] mb-4">On-Site Amenities</h2>
-            <h3 className="text-5xl md:text-6xl font-bold font-serif text-emerald-950">Curated For Comfort</h3>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-12 gap-y-24">
-            {[
-              { icon: 'Waves', label: '2 Spring Pools', desc: 'Natural mountain water' },
-              { icon: 'Wifi', label: 'Starlink WiFi', desc: 'High-speed connectivity' },
-              { icon: 'Flame', label: 'BBQ Setup', desc: 'Grill fee Rs.1500' },
-              { icon: 'Footprints', label: 'Nature Trails', desc: 'Guided jungle paths' },
-              { icon: 'Coffee', label: 'Coffee Setup', desc: 'Inclusive in all units' },
-              { icon: 'Gamepad2', label: 'Indoor Games', desc: 'Carrom, Chess, Cards' },
-              { icon: 'Bird', label: 'Bird Watching', desc: 'Rich local biodiversity' },
-              { icon: 'ShieldCheck', label: 'CCTV Parking', desc: 'Secure lighting & site' }
-            ].map((item, i) => (
-              <div key={i} className="text-center group">
-                <div className="w-24 h-24 bg-white rounded-[2.5rem] flex items-center justify-center mx-auto mb-8 shadow-sm group-hover:shadow-xl group-hover:scale-105 transition-all duration-500">
-                  <div className="text-emerald-900 w-10 h-10 flex items-center justify-center">
-                    {/* Simplified icon rendering logic for the example */}
-                    {item.label === '2 Spring Pools' ? <Waves className="w-full h-full" suppressHydrationWarning /> :
-                      item.label === 'Starlink WiFi' ? <Wifi className="w-full h-full" suppressHydrationWarning /> :
-                        item.label === 'BBQ Setup' ? <Flame className="w-full h-full" suppressHydrationWarning /> :
-                          item.label === 'Nature Trails' ? <Footprints className="w-full h-full" suppressHydrationWarning /> :
-                            item.label === 'Coffee Setup' ? <div className="text-2xl">☕</div> :
-                              item.label === 'Indoor Games' ? <div className="text-2xl">🎲</div> :
-                                item.label === 'Bird Watching' ? <div className="text-2xl">🦜</div> :
-                                  <div className="text-2xl">🛡️</div>}
-                  </div>
-                </div>
-                <h4 className="font-bold text-emerald-950 mb-3 uppercase tracking-widest text-xs">{item.label}</h4>
-                <p className="text-stone-400 text-[11px] font-medium tracking-wide uppercase">{item.desc}</p>
-              </div>
-            ))}
-          </div>
+      {/* Facilities Slider */}
+      <section className="py-24 bg-stone-50 overflow-hidden">
+        <div className="container mx-auto px-4 mb-16 text-center">
+          <h2 className="text-[11px] font-bold text-emerald-800 uppercase tracking-[0.5em] mb-4">On-Site Amenities</h2>
+          <h3 className="text-5xl md:text-6xl font-bold font-serif text-emerald-950">Curated For Comfort</h3>
         </div>
+        <AmenitiesSlider />
       </section>
 
       {/* Unified Packages Section */}
-      <section id="packages" className="py-40 bg-white">
+      <section id="packages" className="py-24 bg-white">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-24 gap-8">
             <div className="max-w-2xl">
@@ -241,7 +210,7 @@ export default function Home() {
       </section>
 
       {/* Jungle Hiking Section */}
-      <section className="py-40 bg-emerald-950 relative overflow-hidden text-white">
+      <section className="py-24 bg-emerald-950 relative overflow-hidden text-white">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* Image Side */}
@@ -303,7 +272,7 @@ export default function Home() {
               {/* CTA */}
               <Link href="/packages/jungle-trek" className="inline-flex items-center gap-3 px-8 py-4 bg-emerald-900 text-white rounded-2xl hover:bg-emerald-800 transition-all hover:shadow-xl group">
                 <span className="font-bold uppercase tracking-widest text-xs">Book This Trek</span>
-                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" suppressHydrationWarning>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </Link>
@@ -375,7 +344,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-40 bg-white text-center">
+      <section className="py-24 bg-white text-center">
         <div className="container mx-auto px-4">
           <h2 className="text-5xl md:text-[6rem] font-bold font-serif mb-12 text-emerald-950 leading-tight tracking-tighter">Ready for your <br /><span className="italic font-normal">wilderness retreat?</span></h2>
           <p className="text-stone-500 text-xl mb-16 font-medium max-w-2xl mx-auto leading-relaxed">
