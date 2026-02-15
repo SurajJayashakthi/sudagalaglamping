@@ -49,6 +49,7 @@ export default function Home() {
               suppressHydrationWarning
             />
             <div className="absolute inset-0 bg-stone-900/40"></div>
+          </div>
         </motion.div>
 
         <div className="relative z-10 text-center text-white px-4 max-w-6xl mx-auto">
