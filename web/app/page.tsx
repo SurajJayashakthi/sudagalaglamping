@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { SupabaseImage } from '@/components/ui/supabase-image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { WaveDivider } from '@/components/ui/wave-divider';
 import { AccommodationCard } from '@/components/ui/accommodation-card';
 import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabaseClient';
@@ -30,19 +31,24 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen bg-white">
+    <div className="flex flex-col min-h-screen bg-white overflow-x-hidden">
       {/* Hero Section */}
       <section id="home" className="relative h-[95vh] flex items-center justify-center overflow-hidden">
-        <motion.div style={{ y: y1 }} className="absolute inset-0 z-0 select-none" suppressHydrationWarning>
-          <SupabaseImage
-            src="/images/hero/new_hero.jpg"
-            alt="Sudagala Jungle Glamping"
-            fill
-            className="object-cover"
-            priority
-            suppressHydrationWarning
-          />
-          <div className="absolute inset-0 bg-stone-900/40"></div>
+        <motion.div
+          style={{ y: y1 }}
+          className="absolute inset-0 z-0 select-none overflow-hidden"
+          suppressHydrationWarning
+        >
+          <div className="absolute inset-0" style={{ borderBottomRightRadius: '150px' }}>
+            <SupabaseImage
+              src="/images/hero/new_hero.jpg"
+              alt="Sudagala Jungle Glamping"
+              fill
+              className="object-cover"
+              priority
+              suppressHydrationWarning
+            />
+            <div className="absolute inset-0 bg-stone-900/40"></div>
         </motion.div>
 
         <div className="relative z-10 text-center text-white px-4 max-w-6xl mx-auto">
@@ -53,7 +59,7 @@ export default function Home() {
           >
             <h2 className="text-sm md:text-base tracking-[0.3em] uppercase mb-4 font-bold text-stone-200 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">Glamping, Because Therapy is Expensive</h2>
             <h3 className="text-xs md:text-sm tracking-[0.5em] uppercase mb-8 font-bold text-emerald-400 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">Sudagala Village • KURUWAITA</h3>
-            <h1 className="text-5xl md:text-[10rem] font-bold font-serif mb-12 leading-[1.1] md:leading-[0.8] tracking-tighter drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)]">
+            <h1 className="text-4xl md:text-[10rem] font-bold font-serif mb-12 leading-[1.1] md:leading-[0.8] tracking-tighter drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)]">
               Sanctuary <br className="hidden md:block" /><span className="text-emerald-300 italic">of Wilds</span>
             </h1>
           </motion.div>
@@ -78,19 +84,28 @@ export default function Home() {
             </Link>
           </motion.div>
         </div>
+
+        {/* Wave Divider */}
+        <WaveDivider fill="#ffffff" />
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-24 bg-white">
+      <section id="about" className="py-12 bg-white">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-24 items-center">
-            <div className="relative h-[600px] rounded-[3rem] overflow-hidden shadow-2xl order-2 lg:order-1">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+            <div
+              className="relative h-[300px] md:h-[600px] overflow-hidden shadow-2xl order-2 lg:order-1"
+              style={{ borderTopLeftRadius: '100px', borderTopRightRadius: '2rem', borderBottomLeftRadius: '2rem', borderBottomRightRadius: '2rem' }}
+            >
               <SupabaseImage
                 src="/images/about/645721004.jpg"
                 alt="Sudagala Jungle Experience"
                 fill
                 className="object-cover"
               />
+
+              {/* Wave Divider */}
+              <WaveDivider fill="#ffffff" className="z-10" />
             </div>
             <div className="order-1 lg:order-2">
               <h2 className="text-sm font-bold text-emerald-800 uppercase tracking-[0.4em] mb-6">About the retreat</h2>
@@ -151,7 +166,7 @@ export default function Home() {
       </section>
 
       {/* Stats Counter */}
-      <section className="py-24 bg-stone-50">
+      <section className="py-12 bg-stone-50">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
             <div className="text-center">
@@ -175,7 +190,7 @@ export default function Home() {
       </section>
 
       {/* Facilities Slider */}
-      <section className="py-24 bg-stone-50 overflow-hidden">
+      <section className="py-12 bg-stone-50 overflow-hidden">
         <div className="container mx-auto px-4 mb-16 text-center">
           <h2 className="text-[11px] font-bold text-emerald-800 uppercase tracking-[0.5em] mb-4">On-Site Amenities</h2>
           <h3 className="text-4xl md:text-6xl font-bold font-serif text-emerald-950">Curated For Comfort</h3>
@@ -184,12 +199,12 @@ export default function Home() {
       </section>
 
       {/* Unified Packages Section */}
-      <section id="packages" className="py-24 bg-white">
+      <section id="packages" className="py-12 bg-white">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-24 gap-8">
             <div className="max-w-2xl">
               <h2 className="text-sm font-bold text-emerald-800 uppercase tracking-[0.3em] mb-6">Our Accommodations</h2>
-              <h3 className="text-5xl md:text-7xl font-bold font-serif text-emerald-950 leading-tight">Wild <br />Sanctuaries</h3>
+              <h3 className="text-4xl md:text-7xl font-bold font-serif text-emerald-950 leading-tight">Wild <br />Sanctuaries</h3>
             </div>
             <div className="max-w-xs">
               <p className="text-stone-500 font-medium leading-relaxed mb-6">
@@ -210,11 +225,11 @@ export default function Home() {
       </section>
 
       {/* Jungle Hiking Section */}
-      <section className="py-24 bg-emerald-950 relative overflow-hidden text-white">
+      <section className="py-12 bg-emerald-950 relative overflow-hidden text-white">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Image Side */}
-            <div className="relative h-[600px] rounded-[3rem] overflow-hidden shadow-2xl order-2 lg:order-1 group">
+            <div className="relative h-[300px] md:h-[600px] rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl order-2 lg:order-1 group">
               <SupabaseImage
                 src="/images/facilities/hiking/WhatsApp Image 2025-11-05 at 9.43.33 PM.jpeg"
                 alt="Waterfall Trek"
@@ -285,7 +300,7 @@ export default function Home() {
       <NearbyWondersSection />
 
       {/* Policy Quick Info */}
-      <section className="py-32 bg-stone-50 border-t border-stone-100">
+      <section className="py-16 bg-stone-50 border-t border-stone-100">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-16">
             <div>
@@ -344,7 +359,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-white text-center">
+      <section className="py-12 bg-white text-center">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl md:text-[6rem] font-bold font-serif mb-12 text-emerald-950 leading-tight tracking-tighter">Ready for your <br className="hidden md:block" /><span className="italic font-normal">wilderness retreat?</span></h2>
           <p className="text-stone-500 text-xl mb-16 font-medium max-w-2xl mx-auto leading-relaxed">

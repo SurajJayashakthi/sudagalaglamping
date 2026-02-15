@@ -174,8 +174,8 @@ export function BookingForm({ stay }: { stay: Stay }) {
     }
 
     return (
-        <div className="bg-white p-8 md:p-12 rounded-[3.5rem] border border-stone-100 shadow-2xl sticky top-32">
-            <h3 className="text-3xl font-bold text-emerald-950 mb-10 font-serif tracking-tight">Reserve Sanctuary</h3>
+        <div className="bg-white p-6 md:p-12 rounded-[2rem] md:rounded-[3.5rem] border border-stone-100 shadow-2xl sticky top-32">
+            <h3 className="text-2xl md:text-3xl font-bold text-emerald-950 mb-10 font-serif tracking-tight">Reserve Sanctuary</h3>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
                 <div>
@@ -190,7 +190,7 @@ export function BookingForm({ stay }: { stay: Stay }) {
                     {errors.customer_name && <p className="text-red-500 text-[10px] font-bold mt-2 uppercase tracking-wide">{errors.customer_name.message}</p>}
                 </div>
 
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                     <div>
                         <label className="flex items-center gap-3 text-[11px] font-bold text-stone-400 uppercase tracking-widest mb-3">
                             <Phone className="w-4 h-4 text-emerald-800" suppressHydrationWarning /> Phone
@@ -214,7 +214,7 @@ export function BookingForm({ stay }: { stay: Stay }) {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                     <div>
                         <label className="flex items-center gap-3 text-[11px] font-bold text-stone-400 uppercase tracking-widest mb-3">
                             <Calendar className="w-4 h-4 text-emerald-800" suppressHydrationWarning /> Arrival
@@ -252,7 +252,7 @@ export function BookingForm({ stay }: { stay: Stay }) {
                                     key={t.id}
                                     type="button"
                                     onClick={() => setValue('tier', t.id as any)}
-                                    className={`p-5 rounded-2xl border text-left transition-all ${tier === t.id
+                                    className={`p-4 md:p-5 rounded-2xl border text-left transition-all ${tier === t.id
                                         ? 'bg-emerald-50 border-emerald-500 shadow-sm'
                                         : 'bg-white border-stone-100 hover:border-emerald-200'
                                         }`}
@@ -277,7 +277,7 @@ export function BookingForm({ stay }: { stay: Stay }) {
                     <Button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full bg-emerald-900 hover:bg-emerald-950 text-white rounded-2xl py-8 h-auto text-lg font-bold shadow-xl transition-all hover:scale-[1.02] active:scale-98"
+                        className="w-full bg-emerald-900 hover:bg-emerald-950 text-white rounded-2xl py-6 md:py-8 h-auto text-lg font-bold shadow-xl transition-all hover:scale-[1.02] active:scale-98"
                     >
                         {isSubmitting ? 'Requesting...' : 'Secure Your Sanctuary'}
                     </Button>

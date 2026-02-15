@@ -66,24 +66,24 @@ export function PackageDetailClient({ slug }: PackageDetailClientProps) {
     const images = categoryKey ? galleryImages[categoryKey as keyof typeof galleryImages] : null;
 
     return (
-        <div className="flex flex-col min-h-screen bg-stone-50">
-            <main className="flex-grow pt-40 pb-32">
-                <div className="container mx-auto px-4">
+        <div className="flex flex-col min-h-screen bg-stone-50 overflow-x-hidden w-full max-w-full">
+            <main className="flex-grow pt-40 pb-32 w-full max-w-full overflow-x-hidden">
+                <div className="container mx-auto px-4 w-full max-w-full">
                     <Link href="/packages" className="inline-flex items-center gap-2 text-stone-500 hover:text-emerald-900 font-bold uppercase tracking-widest text-xs mb-12 transition-colors group bg-white/50 backdrop-blur px-4 py-2 rounded-full border border-stone-100 shadow-sm w-fit">
                         <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" /> Back to all packages
                     </Link>
 
                     {/* Main Content Grid */}
-                    <div className="grid lg:grid-cols-2 gap-20 items-start mb-24">
+                    <div className="grid lg:grid-cols-2 gap-8 lg:gap-20 items-start mb-24 w-full max-w-full">
                         {/* Left Column: Gallery Upgrade */}
-                        <div className="space-y-6">
+                        <div className="space-y-6 w-full max-w-full overflow-hidden">
                             {/* Main Image */}
                             <motion.div
                                 key={activeImage || stay.image_url}
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ duration: 0.6, ease: "easeInOut" }}
-                                className="relative w-full aspect-[4/3] rounded-[2.5rem] md:rounded-[4rem] overflow-hidden shadow-2xl border border-stone-200 bg-stone-100"
+                                className="relative w-full max-w-full aspect-[4/3] rounded-[2.5rem] md:rounded-[4rem] overflow-hidden shadow-2xl border border-stone-200 bg-stone-100"
                             >
                                 <SupabaseImage
                                     src={activeImage || stay.image_url}
@@ -96,7 +96,7 @@ export function PackageDetailClient({ slug }: PackageDetailClientProps) {
 
                             {/* Thumbnail Slider */}
                             {images && images.length > 0 && (
-                                <div className="flex gap-4 overflow-x-auto pb-6 scrollbar-hide snap-x w-full">
+                                <div className="flex gap-4 overflow-x-auto pb-6 scrollbar-hide snap-x w-full max-w-full">
                                     {/* Include main image in thumbnails too */}
                                     {[stay.image_url, ...images].map((img, idx) => (
                                         <div
@@ -132,7 +132,7 @@ export function PackageDetailClient({ slug }: PackageDetailClientProps) {
                                         {stay.tagline}
                                     </p>
                                 )}
-                                <h1 className="text-5xl md:text-7xl font-bold font-serif mb-8 text-emerald-950 leading-tight tracking-tight">
+                                <h1 className="text-4xl md:text-7xl font-bold font-serif mb-8 text-emerald-950 leading-tight tracking-tight">
                                     {stay.title}
                                 </h1>
 
@@ -188,9 +188,9 @@ export function PackageDetailClient({ slug }: PackageDetailClientProps) {
                                         {stay.itinerary.map((item, idx) => (
                                             <div key={idx} className="relative pl-8 border-l-2 border-emerald-100 py-2">
                                                 <div className="absolute -left-[9px] top-4 w-4 h-4 rounded-full bg-emerald-700 border-4 border-white shadow-sm" />
-                                                <div className="bg-white p-8 rounded-[2.5rem] border border-stone-100 shadow-sm hover:shadow-md transition-shadow">
+                                                <div className="bg-white p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] border border-stone-100 shadow-sm hover:shadow-md transition-shadow">
                                                     <span className="text-[10px] font-bold text-emerald-700 uppercase tracking-widest mb-2 block">{item.day}</span>
-                                                    <h4 className="text-2xl font-serif font-bold text-emerald-950 mb-6">{item.title}</h4>
+                                                    <h4 className="text-xl md:text-2xl font-serif font-bold text-emerald-950 mb-6">{item.title}</h4>
                                                     <ul className="space-y-4">
                                                         {item.activities.map((activity, aIdx) => (
                                                             <li key={aIdx} className="flex gap-4 text-stone-500 text-sm font-medium leading-relaxed">
@@ -207,7 +207,7 @@ export function PackageDetailClient({ slug }: PackageDetailClientProps) {
                             )}
 
                             {/* Features Card */}
-                            <div className="bg-stone-900/40 backdrop-blur-md rounded-[3rem] p-12 border border-white/5 shadow-xl text-white">
+                            <div className="bg-stone-900/40 backdrop-blur-md rounded-[2.5rem] md:rounded-[3rem] p-8 md:p-12 border border-white/5 shadow-xl text-white">
                                 <h2 className="text-[10px] font-bold text-stone-400 uppercase tracking-[0.3em] text-center border-b border-white/5 pb-6 mb-8">What is included</h2>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     {stay.features.map((feature, i) => (

@@ -16,19 +16,17 @@ const amenities = [
 ];
 
 export function AmenitiesSlider() {
-    // Duplicate for seamless loop
-    const displayAmenities = [...amenities, ...amenities];
+    // Triple duplication for seamless loop
+    const displayAmenities = [...amenities, ...amenities, ...amenities];
 
-    const [isPaused, setIsPaused] = useState(false);
     const [mounted, setMounted] = useState(false);
-
     const [duration, setDuration] = useState(45);
 
     useEffect(() => {
         setMounted(true);
-        // Set faster duration for mobile
+        // Set slower duration for mobile (30s instead of 20s for calmer scrolling)
         if (window.innerWidth < 768) {
-            setDuration(15);
+            setDuration(30);
         }
     }, []);
 
@@ -38,41 +36,46 @@ export function AmenitiesSlider() {
 
     return (
         <div
-            className="relative w-full overflow-hidden bg-white py-10 select-none"
+            className="relative w-full max-w-full overflow-hidden bg-white py-10 select-none"
             suppressHydrationWarning
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
         >
             {/* Gradient masks for smooth edges */}
-            <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white to-transparent z-10" />
-            <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white to-transparent z-10" />
+            <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
 
             <motion.div
                 className="flex gap-12 items-center"
-                animate={isPaused ? {} : {
-                    x: ['0%', '-50%'],
+                style={{
+                    willChange: 'transform',
+                }}
+                animate={{
+                    x: [0, -(amenities.length * 132)], // 120px width + 12px gap = 132px per item
                 }}
                 transition={{
-                    duration: duration,
-                    ease: 'linear',
-                    repeat: Infinity,
+                    x: {
+                        duration: duration,
+                        repeat: Infinity,
+                        ease: 'linear',
+                        repeatType: 'loop',
+                    },
                 }}
             >
                 {displayAmenities.map((item, i) => (
                     <div
                         key={i}
-                        className="flex flex-col items-center justify-center min-w-[120px] group relative"
+                        className="flex flex-col items-center justify-center min-w-[120px] gap-3"
+                        style={{
+                            transform: 'translate3d(0, 0, 0)', // Hardware acceleration
+                        }}
                     >
-                        <div className="w-16 h-16 bg-stone-50 rounded-2xl flex items-center justify-center text-emerald-900 shadow-sm border border-stone-100 transition-all group-hover:bg-emerald-50 group-hover:scale-110 group-hover:shadow-md">
+                        <div className="w-16 h-16 bg-stone-50 rounded-2xl flex items-center justify-center text-emerald-900 shadow-sm border border-stone-100">
                             <item.icon className="w-8 h-8" strokeWidth={1.5} />
                         </div>
 
-                        {/* Name on Hover/Tap */}
-                        <div className="absolute -bottom-2 opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-4">
-                            <span className="bg-stone-900 text-white text-[10px] font-bold uppercase tracking-[0.2em] px-3 py-1 rounded-full whitespace-nowrap shadow-xl">
-                                {item.name}
-                            </span>
-                        </div>
+                        {/* Name always visible */}
+                        <span className="bg-stone-900 text-white text-[10px] font-bold uppercase tracking-[0.2em] px-3 py-1 rounded-full whitespace-nowrap shadow-xl">
+                            {item.name}
+                        </span>
                     </div>
                 ))}
             </motion.div>

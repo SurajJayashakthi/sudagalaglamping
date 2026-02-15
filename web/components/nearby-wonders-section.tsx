@@ -41,7 +41,7 @@ export function NearbyWondersSection() {
     const [activePlace, setActivePlace] = useState<number>(0);
 
     return (
-        <section className="py-20 lg:py-40 bg-white overflow-hidden">
+        <section className="py-10 lg:py-20 bg-white overflow-hidden">
             <div className="container mx-auto px-4">
                 <div className="flex flex-col lg:flex-row gap-12 lg:gap-24 items-center">
                     {/* Left Side - Place Cards */}

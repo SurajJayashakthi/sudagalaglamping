@@ -54,23 +54,23 @@ export function AccommodationDetailClient({ slug }: AccommodationDetailClientPro
     );
 
     return (
-        <div className="flex flex-col min-h-screen bg-white">
-            <main className="flex-grow pt-40 pb-32">
-                <div className="container mx-auto px-4">
+        <div className="flex flex-col min-h-screen bg-white overflow-x-hidden w-full max-w-full">
+            <main className="flex-grow pt-40 pb-32 w-full max-w-full overflow-x-hidden">
+                <div className="container mx-auto px-4 w-full max-w-full">
                     <Link href="/packages" className="inline-flex items-center gap-2 text-stone-500 hover:text-emerald-900 font-bold uppercase tracking-widest text-xs mb-12 transition-colors group bg-white/50 backdrop-blur px-4 py-2 rounded-full border border-stone-100 shadow-sm w-fit">
                         <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" /> Back to all packages
                     </Link>
 
                     {/* Main Content Grid */}
-                    <div className="grid lg:grid-cols-2 gap-20 items-start mb-24">
+                    <div className="grid lg:grid-cols-2 gap-8 lg:gap-20 items-start mb-24 w-full max-w-full">
                         {/* Left Column */}
-                        <div className="space-y-12">
+                        <div className="space-y-12 w-full max-w-full overflow-hidden">
                             {/* Main Image only - Gallery removed to keep site clean */}
                             <motion.div
                                 initial={{ opacity: 0, x: -30 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ duration: 0.8 }}
-                                className="relative aspect-[4/3] rounded-[3rem] overflow-hidden shadow-2xl"
+                                className="relative aspect-[4/3] rounded-[3rem] overflow-hidden shadow-2xl w-full max-w-full"
                             >
                                 <SupabaseImage
                                     src={stay.image_url}

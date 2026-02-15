@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+/* Universal Box Sizing Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box !important;
+}
+
 @theme inline {
   --color-stone-50: #fbfbfb;
   --color-stone-100: #f5f5f4;
@@ -25,6 +32,8 @@
 /* Force Light Mode Aesthetics */
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden !important;
+  position: relative;
 }
 
 body {
@@ -32,6 +41,10 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
+  position: relative;
 }
 
 /* Premium Card Styles */
