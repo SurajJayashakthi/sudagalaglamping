@@ -13,7 +13,7 @@ interface StayFormProps {
     onCancel: () => void
 }
 
-const CATEGORIES = ['Luxury Tent', 'Treehouse', 'Cave Room', 'Cabana', 'Day Outing'] as const
+const CATEGORIES = ['Cabana', 'Treehouse', 'Cave Room', 'Day Outing'] as const
 
 export function StayForm({ stay, onSuccess, onCancel }: StayFormProps) {
     const [loading, setLoading] = useState(false)
@@ -21,7 +21,7 @@ export function StayForm({ stay, onSuccess, onCancel }: StayFormProps) {
     const [formData, setFormData] = useState({
         title: stay?.title || '',
         slug: stay?.slug || '',
-        category: stay?.category || 'Luxury Tent',
+        category: stay?.category || 'Cabana',
         description: stay?.description || '',
         base_price_lkr: stay?.base_price_lkr || '',
         max_guests: stay?.max_guests || 2,
