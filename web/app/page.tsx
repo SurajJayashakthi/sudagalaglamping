@@ -272,7 +272,7 @@ export default function Home() {
               </div>
 
               <Link href="/packages/jungle-trek">
-                <Button className="bg-white text-emerald-950 hover:bg-emerald-50 rounded-full px-10 py-7 text-lg font-bold">
+                <Button className="!bg-white !text-emerald-950 hover:!bg-emerald-50 rounded-full px-10 py-7 text-lg font-bold shadow-lg shadow-black/20 transition-transform active:scale-95">
                   Book This Trek
                 </Button>
               </Link>
