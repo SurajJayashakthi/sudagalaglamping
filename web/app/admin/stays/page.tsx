@@ -2,18 +2,29 @@
 
 import { useState, useEffect } from 'react'
 import { supabase } from '@/lib/supabaseClient'
+import { Session } from '@supabase/supabase-js'
 import { Button } from '@/components/ui/button'
 import { Stay } from '@/types'
 import { StayForm } from '@/components/admin/stay-form'
-import { Plus, Edit2, Trash2, ArrowLeft, Calendar, Users, Activity, Eye, Package } from 'lucide-react'
+import { Plus, Edit2, Trash2, ArrowLeft, Users, Activity, Package } from 'lucide-react'
 import Link from 'next/link'
+import { SupabaseImage } from '@/components/ui/supabase-image'
 
 export default function AdminStays() {
-    const [session, setSession] = useState<any>(null)
+    const [session, setSession] = useState<Session | null>(null)
     const [stays, setStays] = useState<Stay[]>([])
     const [loading, setLoading] = useState(true)
     const [isFormOpen, setIsFormOpen] = useState(false)
     const [editingStay, setEditingStay] = useState<Stay | null>(null)
+
+    async function fetchStays() {
+        const { data } = await supabase
+            .from('stays')
+            .select('*')
+            .order('created_at', { ascending: false })
+
+        if (data) setStays(data)
+    }
 
     useEffect(() => {
         supabase.auth.getSession().then(({ data: { session } }) => {
@@ -22,15 +33,6 @@ export default function AdminStays() {
             setLoading(false)
         })
     }, [])
-
-    async function fetchStays() {
-        const { data, error } = await supabase
-            .from('stays')
-            .select('*')
-            .order('created_at', { ascending: false })
-
-        if (data) setStays(data)
-    }
 
     async function handleDelete(id: string) {
         if (!confirm('Are you sure you want to delete this stay?')) return
@@ -105,7 +107,12 @@ export default function AdminStays() {
                         {stays.map((stay) => (
                             <div key={stay.id} className="bg-white dark:bg-stone-900 rounded-[2.5rem] overflow-hidden shadow-sm border border-stone-200 dark:border-stone-800 group transition-all hover:shadow-2xl hover:shadow-green-900/5">
                                 <div className="aspect-[16/10] relative overflow-hidden">
-                                    <img src={stay.image_url} alt={stay.title} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
+                                    <SupabaseImage
+                                        src={stay.image_url}
+                                        alt={stay.title}
+                                        fill
+                                        className="object-cover transition-transform duration-1000 group-hover:scale-110"
+                                    />
                                     <div className="absolute top-6 left-6 flex gap-2">
                                         <span className="bg-stone-900/80 backdrop-blur-md text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest border border-white/10">
                                             {stay.category}

@@ -2,14 +2,14 @@
 
 import { useState, useEffect } from 'react'
 import { supabase } from '@/lib/supabaseClient'
-import { useRouter } from 'next/navigation'
+import { Session } from '@supabase/supabase-js'
 import { Button } from '@/components/ui/button'
 import { Booking } from '@/types'
-import { X, ExternalLink, Calendar, Phone, User, DollarSign, MessageCircle } from 'lucide-react'
+import { X, Calendar, Phone, User, DollarSign, MessageCircle } from 'lucide-react'
 import Link from 'next/link'
 
 export default function AdminDashboard() {
-    const [session, setSession] = useState<any>(null)
+    const [session, setSession] = useState<Session | null>(null)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [bookings, setBookings] = useState<Booking[]>([])
@@ -17,8 +17,17 @@ export default function AdminDashboard() {
     const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null)
     // const router = useRouter() // Not strictly needed if conditional rendering is used
 
+    async function fetchBookings() {
+        const { data } = await supabase
+            .from('bookings')
+            .select('*')
+            .order('created_at', { ascending: false })
+
+        if (data) setBookings(data)
+    }
+
     useEffect(() => {
-        supabase.auth.getSession().then(({ data: { session } }: { data: { session: any } }) => {
+        supabase.auth.getSession().then(({ data: { session } }) => {
             setSession(session)
             setLoading(false)
             if (session) fetchBookings()
@@ -26,22 +35,13 @@ export default function AdminDashboard() {
 
         const {
             data: { subscription },
-        } = supabase.auth.onAuthStateChange((_event: string, session: any) => {
+        } = supabase.auth.onAuthStateChange((_event, session) => {
             setSession(session)
             if (session) fetchBookings()
         })
 
         return () => subscription.unsubscribe()
     }, [])
-
-    async function fetchBookings() {
-        const { data, error } = await supabase
-            .from('bookings')
-            .select('*')
-            .order('created_at', { ascending: false })
-
-        if (data) setBookings(data)
-    }
 
     async function handleStatusUpdate(id: string, newStatus: string) {
         if (!confirm(`Are you sure you want to mark this booking as ${newStatus}?`)) return
@@ -118,7 +118,7 @@ export default function AdminDashboard() {
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
                 <div>
                     <h1 className="text-4xl font-bold font-serif text-stone-900 dark:text-white mb-2">Dashboard</h1>
-                    <p className="text-stone-500 dark:text-stone-400">Welcome back, Admin. Here is what's happening today.</p>
+                    <p className="text-stone-500 dark:text-stone-400">Welcome back, Admin. Here is what&apos;s happening today.</p>
                 </div>
                 <Button onClick={handleLogout} variant="outline" className="border-red-200 text-red-600 hover:bg-red-50 hover:text-red-700 dark:border-red-900 dark:text-red-400 dark:hover:bg-red-950/30">Sign Out</Button>
             </div>

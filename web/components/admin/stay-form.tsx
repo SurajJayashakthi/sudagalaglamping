@@ -4,7 +4,8 @@ import { useState } from 'react'
 import { supabase } from '@/lib/supabaseClient'
 import { Button } from '@/components/ui/button'
 import { Stay } from '@/types'
-import { X, Upload, Loader2, Package as PackageIcon, DollarSign, Clock, Type, Users, Check } from 'lucide-react'
+import { SupabaseImage } from '@/components/ui/supabase-image'
+import { X, Upload, Loader2, DollarSign, Type, Users } from 'lucide-react'
 
 interface StayFormProps {
     stay?: Stay | null
@@ -12,7 +13,7 @@ interface StayFormProps {
     onCancel: () => void
 }
 
-const CATEGORIES = ['Luxury Tent', 'Treehouse', 'Cave Room', 'Cabana', 'Special Package'] as const
+const CATEGORIES = ['Luxury Tent', 'Treehouse', 'Cave Room', 'Cabana', 'Day Outing'] as const
 
 export function StayForm({ stay, onSuccess, onCancel }: StayFormProps) {
     const [loading, setLoading] = useState(false)
@@ -51,8 +52,8 @@ export function StayForm({ stay, onSuccess, onCancel }: StayFormProps) {
                 .getPublicUrl(filePath)
 
             setFormData(prev => ({ ...prev, image_url: publicUrl }))
-        } catch (error: any) {
-            alert('Error uploading image: ' + error.message)
+        } catch (error) {
+            alert('Error uploading image: ' + (error as Error).message)
         } finally {
             setUploading(false)
         }
@@ -89,8 +90,8 @@ export function StayForm({ stay, onSuccess, onCancel }: StayFormProps) {
             }
 
             onSuccess()
-        } catch (error: any) {
-            alert('Error saving stay: ' + error.message)
+        } catch (error) {
+            alert('Error saving stay: ' + (error as Error).message)
         } finally {
             setLoading(false)
         }
@@ -138,7 +139,7 @@ export function StayForm({ stay, onSuccess, onCancel }: StayFormProps) {
                             </label>
                             <select
                                 value={formData.category}
-                                onChange={e => setFormData(prev => ({ ...prev, category: e.target.value as any }))}
+                                onChange={e => setFormData(prev => ({ ...prev, category: e.target.value as typeof CATEGORIES[number] }))}
                                 className="w-full p-3 rounded-xl border border-stone-200 dark:border-stone-700 bg-stone-50 dark:bg-stone-800 outline-none focus:ring-2 focus:ring-green-500 transition-all capitalize"
                             >
                                 {CATEGORIES.map(cat => (
@@ -237,7 +238,12 @@ export function StayForm({ stay, onSuccess, onCancel }: StayFormProps) {
                         <div className="relative aspect-video rounded-2xl border-2 border-dashed border-stone-200 dark:border-stone-800 bg-stone-50 dark:bg-stone-900/50 flex flex-col items-center justify-center overflow-hidden group">
                             {formData.image_url ? (
                                 <>
-                                    <img src={formData.image_url} alt="Preview" className="w-full h-full object-cover" />
+                                    <SupabaseImage
+                                        src={formData.image_url}
+                                        alt="Preview"
+                                        fill
+                                        className="object-cover"
+                                    />
                                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                         <label className="cursor-pointer bg-white text-stone-900 px-4 py-2 rounded-full font-bold text-sm hover:scale-105 transition-transform">
                                             Change Image

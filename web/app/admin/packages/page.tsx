@@ -3,6 +3,7 @@
 
 
 import { useState, useEffect } from 'react'
+import { Session } from '@supabase/supabase-js'
 
 import { supabase } from '@/lib/supabaseClient'
 
@@ -12,15 +13,15 @@ import { Package } from '@/types'
 
 import { PackageForm } from '@/components/admin/package-form'
 
-import { Plus, Edit2, Trash2, Package as PackageIcon, ArrowLeft, Search, Calendar, DollarSign } from 'lucide-react'
+import { Plus, Edit2, Trash2, Package as PackageIcon, ArrowLeft, Calendar } from 'lucide-react'
 
 import Link from 'next/link'
+import { SupabaseImage } from '@/components/ui/supabase-image'
 
 
 
 export default function AdminPackages() {
-
-    const [session, setSession] = useState<any>(null)
+    const [session, setSession] = useState<Session | null>(null)
 
     const [packages, setPackages] = useState<Package[]>([])
 
@@ -29,6 +30,24 @@ export default function AdminPackages() {
     const [isFormOpen, setIsFormOpen] = useState(false)
 
     const [editingPackage, setEditingPackage] = useState<Package | null>(null)
+
+
+
+    async function fetchPackages() {
+
+        const { data } = await supabase
+
+            .from('packages')
+
+            .select('*')
+
+            .order('created_at', { ascending: false })
+
+
+
+        if (data) setPackages(data)
+
+    }
 
 
 
@@ -45,24 +64,6 @@ export default function AdminPackages() {
         })
 
     }, [])
-
-
-
-    async function fetchPackages() {
-
-        const { data, error } = await supabase
-
-            .from('packages')
-
-            .select('*')
-
-            .order('created_at', { ascending: false })
-
-
-
-        if (data) setPackages(data)
-
-    }
 
 
 
@@ -201,9 +202,12 @@ export default function AdminPackages() {
                             <div key={pkg.id} className="bg-white dark:bg-stone-900 rounded-3xl overflow-hidden shadow-sm border border-stone-200 dark:border-stone-800 group transition-all hover:shadow-xl hover:-translate-y-1">
 
                                 <div className="aspect-[16/10] relative overflow-hidden">
-
-                                    <img src={pkg.image_url} alt={pkg.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-
+                                    <SupabaseImage
+                                        src={pkg.image_url}
+                                        alt={pkg.title}
+                                        fill
+                                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                    />
                                     <div className="absolute bottom-4 right-4 bg-black/40 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold text-white border border-white/20">
 
                                         LKR {(Number(pkg.price) || 0).toLocaleString()}

@@ -1,0 +1,110 @@
+﻿
+> web@0.1.0 lint
+> eslint
+
+
+C:\Users\GamezPark\.gemini\antigravity\scratch\Sudagala-jungle-glamping\web\app\accommodations\page.tsx
+   4:10  warning  'motion' is defined but never used          @typescript-eslint/no-unused-vars
+   9:10  warning  'Footer' is defined but never used          @typescript-eslint/no-unused-vars
+  17:27  warning  'error' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  48:47  warning  'index' is defined but never used           @typescript-eslint/no-unused-vars
+
+C:\Users\GamezPark\.gemini\antigravity\scratch\Sudagala-jungle-glamping\web\app\admin\packages\page.tsx
+  24:44  error    Unexpected any. Specify a different type    @typescript-eslint/no-explicit-any
+  38:23  warning  'error' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\GamezPark\.gemini\antigravity\scratch\Sudagala-jungle-glamping\web\app\admin\page.tsx
+    5:10   warning  'useRouter' is defined but never used                            @typescript-eslint/no-unused-vars
+   12:44   error    Unexpected any. Specify a different type                         @typescript-eslint/no-explicit-any
+   21:23   warning  'error' is assigned a value but never used                       @typescript-eslint/no-unused-vars
+   30:84   error    Unexpected any. Specify a different type                         @typescript-eslint/no-explicit-any
+   38:71   error    Unexpected any. Specify a different type                         @typescript-eslint/no-explicit-any
+  121:104  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\Users\GamezPark\.gemini\antigravity\scratch\Sudagala-jungle-glamping\web\app\admin\stays\page.tsx
+  13:44  error    Unexpected any. Specify a different type    @typescript-eslint/no-explicit-any
+  20:23  warning  'error' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\GamezPark\.gemini\antigravity\scratch\Sudagala-jungle-glamping\web\app\api\keep-alive\route.ts
+  13:21  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\GamezPark\.gemini\antigravity\scratch\Sudagala-jungle-glamping\web\app\contact\page.tsx
+  52:82  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\Users\GamezPark\.gemini\antigravity\scratch\Sudagala-jungle-glamping\web\app\experiences\page.tsx
+  6:37  warning  'Compass' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\GamezPark\.gemini\antigravity\scratch\Sudagala-jungle-glamping\web\app\not-found.tsx
+  10:39  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  10:88  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\Users\GamezPark\.gemini\antigravity\scratch\Sudagala-jungle-glamping\web\app\packages\page.tsx
+  10:10  warning  'Header' is defined but never used          @typescript-eslint/no-unused-vars
+  11:10  warning  'Footer' is defined but never used          @typescript-eslint/no-unused-vars
+  12:10  warning  'Calendar' is defined but never used        @typescript-eslint/no-unused-vars
+  12:20  warning  'MessageCircle' is defined but never used   @typescript-eslint/no-unused-vars
+  12:35  warning  'ArrowRight' is defined but never used      @typescript-eslint/no-unused-vars
+  20:27  warning  'error' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\GamezPark\.gemini\antigravity\scratch\Sudagala-jungle-glamping\web\app\page.tsx
+  26:21  warning  'error' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\GamezPark\.gemini\antigravity\scratch\Sudagala-jungle-glamping\web\components\accommodations\accommodation-detail-client.tsx
+   7:10  warning  'Header' is defined but never used          @typescript-eslint/no-unused-vars
+   8:10  warning  'Footer' is defined but never used          @typescript-eslint/no-unused-vars
+  25:27  warning  'error' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\GamezPark\.gemini\antigravity\scratch\Sudagala-jungle-glamping\web\components\admin\stay-form.tsx
+    7:41   warning  'PackageIcon' is defined but never used                                                                                                                                                                                                                                                  @typescript-eslint/no-unused-vars
+    7:66   warning  'Clock' is defined but never used                                                                                                                                                                                                                                                        @typescript-eslint/no-unused-vars
+    7:86   warning  'Check' is defined but never used                                                                                                                                                                                                                                                        @typescript-eslint/no-unused-vars
+   54:25   error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   92:25   error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  141:108  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  240:37   warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Users\GamezPark\.gemini\antigravity\scratch\Sudagala-jungle-glamping\web\components\booking-form.tsx
+  187:25   error  Unexpected any. Specify a different type                         @typescript-eslint/no-explicit-any
+  314:77   error  Unexpected any. Specify a different type                         @typescript-eslint/no-explicit-any
+  347:123  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  347:166  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+
+C:\Users\GamezPark\.gemini\antigravity\scratch\Sudagala-jungle-glamping\web\components\packages\package-detail-client.tsx
+   7:10  warning  'Header' is defined but never used          @typescript-eslint/no-unused-vars
+   8:10  warning  'Footer' is defined but never used          @typescript-eslint/no-unused-vars
+  14:10  warning  'Gallery' is defined but never used         @typescript-eslint/no-unused-vars
+  29:27  warning  'error' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\GamezPark\.gemini\antigravity\scratch\Sudagala-jungle-glamping\web\components\testimonials-section.tsx
+   4:10  warning  'SupabaseImage' is defined but never used                        @typescript-eslint/no-unused-vars
+  67:33  error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  67:43  error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+
+C:\Users\GamezPark\.gemini\antigravity\scratch\Sudagala-jungle-glamping\web\components\ui\accommodation-card.tsx
+  6:10  warning  'Users' is defined but never used       @typescript-eslint/no-unused-vars
+  6:17  warning  'ArrowRight' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\GamezPark\.gemini\antigravity\scratch\Sudagala-jungle-glamping\web\components\ui\amenities-slider.tsx
+  26:9  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\GamezPark\.gemini\antigravity\scratch\Sudagala-jungle-glamping\web\components\ui\amenities-slider.tsx:26:9
+  24 |
+  25 |     useEffect(() => {
+> 26 |         setMounted(true);
+     |         ^^^^^^^^^^ Avoid calling setState() directly within an effect
+  27 |         // Set slower duration for mobile (30s instead of 20s for calmer scrolling)
+  28 |         if (window.innerWidth < 768) {
+  29 |             setDuration(30);  react-hooks/set-state-in-effect
+
+C:\Users\GamezPark\.gemini\antigravity\scratch\Sudagala-jungle-glamping\web\components\ui\gallery.tsx
+  13:35  warning  'title' is defined but never used                                                                                                                                                                                                                                                        @typescript-eslint/no-unused-vars
+  82:29  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+Ô£û 52 problems (20 errors, 32 warnings)
+

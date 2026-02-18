@@ -1,13 +1,13 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/lib/supabaseClient';
 import { Stay } from '@/types';
-import { Calendar, User, Phone, CheckCircle2, MessageCircle, Users, Coffee } from 'lucide-react';
+import { Calendar, User, Phone, CheckCircle2, MessageCircle, Users, Coffee, AlertCircle } from 'lucide-react';
 
 const bookingSchema = z.object({
     customer_name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -23,6 +23,7 @@ type BookingFormValues = z.infer<typeof bookingSchema>;
 export function BookingForm({ stay }: { stay: Stay }) {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
+    const [bookedDates, setBookedDates] = useState<{ start: Date; end: Date }[]>([]);
 
     const { register, handleSubmit, watch, setValue, reset, formState: { errors } } = useForm<BookingFormValues>({
         resolver: zodResolver(bookingSchema),
@@ -38,6 +39,45 @@ export function BookingForm({ stay }: { stay: Stay }) {
     const checkOut = watch('check_out');
     const guestCount = watch('guests');
     const tier = watch('tier');
+
+    // Fetch existing bookings to prevent double booking
+    useEffect(() => {
+        async function fetchBookings() {
+            const { data } = await supabase
+                .from('bookings')
+                .select('check_in, check_out')
+                .eq('accommodation_id', stay.id)
+                .neq('status', 'cancelled'); // Ignore cancelled bookings
+
+            if (data) {
+                setBookedDates(data.map(b => ({
+                    start: new Date(b.check_in),
+                    end: new Date(b.check_out)
+                })));
+            }
+        }
+        fetchBookings();
+    }, [stay.id]);
+
+    const availabilityCheck = useMemo(() => {
+        if (!checkIn || !checkOut) return { isBlocked: false };
+
+        const start = new Date(checkIn);
+        const end = new Date(checkOut);
+
+        if (start >= end) return { isBlocked: false, error: "Check-out must be after check-in" };
+
+        const isBlocked = bookedDates.some(booking => {
+            // Overlap check: (RequestStart < BookingEnd) && (RequestEnd > BookingStart)
+            return (start < booking.end) && (end > booking.start);
+        });
+
+        if (isBlocked) {
+            return { isBlocked: true, error: "This date is already booked. Please choose another stay." };
+        }
+
+        return { isBlocked: false };
+    }, [checkIn, checkOut, bookedDates]);
 
     const pricing = useMemo(() => {
         if (!checkIn || !checkOut || !guestCount) return { total: 0, nights: 0, perPerson: 0 };
@@ -102,6 +142,11 @@ export function BookingForm({ stay }: { stay: Stay }) {
     }, [checkIn, checkOut, guestCount, tier, stay]);
 
     const onSubmit = async (data: BookingFormValues) => {
+        if (availabilityCheck.isBlocked) {
+            alert(availabilityCheck.error);
+            return;
+        }
+
         setIsSubmitting(true);
         try {
             console.log('Submitting booking payload:', {
@@ -139,9 +184,9 @@ export function BookingForm({ stay }: { stay: Stay }) {
             setTimeout(() => {
                 window.open(whatsappUrl, '_blank');
             }, 100);
-        } catch (error: any) {
+        } catch (error) {
             console.error('Booking transaction failed. Full Error:', JSON.stringify(error, null, 2));
-            alert(`Failed to place booking: ${error.message || 'Unknown error'}. Please check console for details.`);
+            alert(`Failed to place booking: ${(error as Error).message || 'Unknown error'}. Please check console for details.`);
         } finally {
             setIsSubmitting(false);
         }
@@ -237,6 +282,21 @@ export function BookingForm({ stay }: { stay: Stay }) {
                     </div>
                 </div>
 
+                {availabilityCheck.isBlocked && (
+                    <div className="bg-red-50 border border-red-100 text-red-600 p-4 rounded-2xl flex items-center gap-3 animate-in fade-in slide-in-from-top-2">
+                        <AlertCircle className="w-5 h-5 flex-shrink-0" />
+                        <span className="text-sm font-bold">{availabilityCheck.error}</span>
+                    </div>
+                )}
+
+                {availabilityCheck.error && !availabilityCheck.isBlocked && (
+                    <div className="bg-amber-50 border border-amber-100 text-amber-600 p-4 rounded-2xl flex items-center gap-3 animate-in fade-in slide-in-from-top-2">
+                        <AlertCircle className="w-5 h-5 flex-shrink-0" />
+                        <span className="text-sm font-bold">{availabilityCheck.error}</span>
+                    </div>
+                )}
+
+
                 {stay.category !== 'Day Outing' && (
                     <div>
                         <label className="flex items-center gap-3 text-[11px] font-bold text-stone-400 uppercase tracking-widest mb-3">
@@ -251,7 +311,7 @@ export function BookingForm({ stay }: { stay: Stay }) {
                                 <button
                                     key={t.id}
                                     type="button"
-                                    onClick={() => setValue('tier', t.id as any)}
+                                    onClick={() => setValue('tier', t.id as 'FB' | 'HB' | 'BB')}
                                     className={`p-4 md:p-5 rounded-2xl border text-left transition-all ${tier === t.id
                                         ? 'bg-emerald-50 border-emerald-500 shadow-sm'
                                         : 'bg-white border-stone-100 hover:border-emerald-200'
@@ -276,12 +336,15 @@ export function BookingForm({ stay }: { stay: Stay }) {
 
                     <Button
                         type="submit"
-                        disabled={isSubmitting}
-                        className="w-full bg-emerald-900 hover:bg-emerald-950 text-white rounded-2xl py-6 md:py-8 h-auto text-lg font-bold shadow-xl transition-all hover:scale-[1.02] active:scale-98"
+                        disabled={isSubmitting || availabilityCheck.isBlocked}
+                        className={`w-full rounded-2xl py-6 md:py-8 h-auto text-lg font-bold shadow-xl transition-all active:scale-98 ${availabilityCheck.isBlocked
+                            ? 'bg-stone-300 text-stone-500 cursor-not-allowed hover:bg-stone-300 hover:scale-100 shadow-none'
+                            : 'bg-emerald-900 hover:bg-emerald-950 text-white hover:scale-[1.02]'
+                            }`}
                     >
-                        {isSubmitting ? 'Requesting...' : 'Secure Your Sanctuary'}
+                        {isSubmitting ? 'Requesting...' : availabilityCheck.isBlocked ? 'Dates Unavailable' : 'Secure Your Sanctuary'}
                     </Button>
-                    <p className="text-[9px] text-center text-stone-400 mt-6 uppercase tracking-[0.2em] font-bold italic">"Pricing depends on guest count & meal tier"</p>
+                    <p className="text-[9px] text-center text-stone-400 mt-6 uppercase tracking-[0.2em] font-bold italic">&quot;Pricing depends on guest count & meal tier&quot;</p>
                 </div>
             </form>
         </div>

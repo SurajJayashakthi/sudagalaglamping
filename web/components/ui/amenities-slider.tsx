@@ -23,6 +23,7 @@ export function AmenitiesSlider() {
     const [duration, setDuration] = useState(45);
 
     useEffect(() => {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         setMounted(true);
         // Set slower duration for mobile (30s instead of 20s for calmer scrolling)
         if (window.innerWidth < 768) {

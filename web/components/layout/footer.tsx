@@ -1,15 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 
 export function Footer() {
-    const [year, setYear] = useState(2026);
-
-    useEffect(() => {
-        setYear(new Date().getFullYear());
-    }, []);
-
     return (
         <footer className="bg-stone-50 text-stone-600 py-12 border-t border-stone-200">
             <div className="container mx-auto px-4">
@@ -64,7 +57,7 @@ export function Footer() {
 
                 {/* Copyright Bar */}
                 <div className="border-t border-stone-200 pt-6 flex flex-col md:flex-row justify-between items-center text-[10px] uppercase tracking-widest text-stone-400 font-bold gap-2">
-                    <p>&copy; {year} Sudagala Jungle Glamping. All rights reserved.</p>
+                    <p>&copy; <span suppressHydrationWarning>{new Date().getFullYear()}</span> Sudagala Jungle Glamping. All rights reserved.</p>
                     <p>Design & Development by Udara Sampath</p>
                 </div>
             </div>
